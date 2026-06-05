@@ -1,1 +1,80 @@
+# LABIRINTO DO TESOURO
 
+def mostrar_mapa(mapa):
+    for linha in mapa:
+        print(" ".join(linha))
+    print()
+
+
+def mover(linha, coluna, jogador):
+    if jogador == "W":
+        return linha - 1, coluna
+    elif jogador == "S":
+        return linha + 1, coluna
+    elif jogador == "A":
+        return linha, coluna - 1
+    elif jogador == "D":
+        return linha, coluna + 1
+
+    return linha, coluna
+
+mapa = [
+    ['🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱'],
+    ['🧱', '🦕', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🌿', '🧱'],
+    ['🧱', '🟫', '☄️', '🌿', '🟫', '🟫', '🟫', '☄️', '🟫', '🧱'],
+    ['🧱', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '🟫', '☄️', '🟫', '🌿', '🟫', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '☄️', '🟫', '🧱'],
+    ['🧱', '🌿', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '☄️', '🟫', '🟫', '🟫', '🌿', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟦', '🧱'],
+    ['🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱']
+]
+
+linha_jogador = 1
+coluna_jogador = 1
+
+jogador = linha_jogador and coluna_jogador
+
+
+pontos = 0
+movimentos_validos = 0
+movimentos_invalidos = 0
+bombas_ativadas = 0
+
+while True:
+
+    mostrar_mapa(mapa)
+
+    print("Pontuação:", pontos)
+    print("W = Cima")
+    print("S = Baixo")
+    print("A = Esquerda")
+    print("D = Direita")
+    print("Q = Sair")
+
+    comando = input("Digite um comando: ").upper()
+
+    if comando == "Q":
+        print("Jogo encerrado!")
+        break
+
+    if comando not in ["W", "A", "S", "D"]:
+        print("Comando inválido!")
+        continue
+
+    nova_linha, nova_coluna = mover(
+        linha_jogador,
+        coluna_jogador,
+        comando
+    )
+
+    if (nova_linha < 0 or nova_linha > 9 or
+            nova_coluna < 0 or nova_coluna > 9):
+        print("Movimento inválido!")
+        pontos -= 5
+        movimentos_invalidos += 1
+        continue
+
+    if mapa[nova_linha][nova_coluna] == "🧱":
+        print("Você bateu em uma parede!")
