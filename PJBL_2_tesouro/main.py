@@ -1,16 +1,80 @@
-# This is a sample Python script.
+# LABIRINTO DO TESOURO
 
-# Press Ctrl+F5 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press F9 to toggle the breakpoint.
+def mostrar_mapa(mapa):
+    for linha in mapa:
+        print(" ".join(linha))
+    print()
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def mover(linha, coluna, jogador):
+    if jogador == "W":
+        return linha - 1, coluna
+    elif jogador == "S":
+        return linha + 1, coluna
+    elif jogador == "A":
+        return linha, coluna - 1
+    elif jogador == "D":
+        return linha, coluna + 1
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    return linha, coluna
+
+mapa = [
+    ['🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱'],
+    ['🧱', '🦕', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🌿', '🧱'],
+    ['🧱', '🟫', '☄️', '🌿', '🟫', '🟫', '🟫', '☄️', '🟫', '🧱'],
+    ['🧱', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '🟫', '☄️', '🟫', '🌿', '🟫', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '☄️', '🟫', '🧱'],
+    ['🧱', '🌿', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '☄️', '🟫', '🟫', '🟫', '🌿', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟦', '🧱'],
+    ['🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱']
+]
+
+linha_jogador = 1
+coluna_jogador = 1
+
+jogador = linha_jogador and coluna_jogador
+
+
+pontos = 0
+movimentos_validos = 0
+movimentos_invalidos = 0
+bombas_ativadas = 0
+
+while True:
+
+    mostrar_mapa(mapa)
+
+    print("Pontuação:", pontos)
+    print("W = Cima")
+    print("S = Baixo")
+    print("A = Esquerda")
+    print("D = Direita")
+    print("Q = Sair")
+
+    comando = input("Digite um comando: ").upper()
+
+    if comando == "Q":
+        print("Jogo encerrado!")
+        break
+
+    if comando not in ["W", "A", "S", "D"]:
+        print("Comando inválido!")
+        continue
+
+    nova_linha, nova_coluna = mover(
+        linha_jogador,
+        coluna_jogador,
+        comando
+    )
+
+    if (nova_linha < 0 or nova_linha > 9 or
+            nova_coluna < 0 or nova_coluna > 9):
+        print("Movimento inválido!")
+        pontos -= 5
+        movimentos_invalidos += 1
+        continue
+
+    if mapa[nova_linha][nova_coluna] == "🧱":
+        print("Você bateu em uma parede!")
