@@ -5,7 +5,7 @@ def mostrar_mapa(mapa):
         print(" ".join(linha))
     print()
 
-
+## Mover dino
 def mover(linha, coluna, jogador):
     if jogador == "W":
         return linha - 1, coluna
@@ -30,13 +30,10 @@ mapa = [
     ['🧱', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟦', '🧱'],
     ['🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱']
 ]
-
-linha_jogador = 1
-coluna_jogador = 1
-
-jogador = linha_jogador and coluna_jogador
-
-
+## Dino andar
+linha = 1
+coluna = 1
+## Dino andar
 pontos = 0
 movimentos_validos = 0
 movimentos_invalidos = 0
@@ -63,18 +60,15 @@ while True:
         print("Comando inválido!")
         continue
 
-    nova_linha, nova_coluna = mover(
-        linha_jogador,
-        coluna_jogador,
-        comando
-    )
+    nova_linha, nova_coluna = mover(linha, coluna, comando)
 
-    if (nova_linha < 0 or nova_linha > 9 or
-            nova_coluna < 0 or nova_coluna > 9):
-        print("Movimento inválido!")
-        pontos -= 5
-        movimentos_invalidos += 1
-        continue
+    # Limpa posição antiga
+    mapa[linha][coluna] = "🟫"
 
-    if mapa[nova_linha][nova_coluna] == "🧱":
-        print("Você bateu em uma parede!")
+    # Atualiza posição
+    linha = nova_linha
+    coluna = nova_coluna
+
+    # Coloca o dinossauro na nova posição
+    mapa[linha][coluna] = "🦕"
+
