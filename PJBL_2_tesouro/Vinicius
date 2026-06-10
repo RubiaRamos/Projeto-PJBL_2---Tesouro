@@ -18,6 +18,20 @@ def mover(linha, coluna, jogador):
 
     return linha, coluna
 
+# funções de validação de movimento (VINICIUS)
+# verifica se a posição está dentro da matriz
+def dentro_do_mapa(linha, coluna):
+    if linha < 0 or linha > 9:
+        return False
+    if coluna < 0 or coluna > 9:
+        return False
+    return True
+
+# verifica se a posição contém uma parede
+def tem_parede(mapa, linha, coluna):
+    return mapa[linha][coluna] == "🧱"
+
+
 mapa = [
     ['🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱'],
     ['🧱', '🦕', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🌿', '🧱'],
@@ -61,6 +75,20 @@ while True:
         continue
 
     nova_linha, nova_coluna = mover(linha, coluna, comando)
+
+    # validação de limites
+    if not dentro_do_mapa(nova_linha, nova_coluna):
+        print("Movimento inválido! Você tentou sair do mapa.")
+        pontos -= 5
+        movimentos_invalidos += 1
+        continue
+
+    # validação de paredes
+    if tem_parede(mapa, nova_linha, nova_coluna):
+        print("Você bateu em uma parede!")
+        pontos -= 5
+        movimentos_invalidos += 1
+        continue
 
     # Limpa posição antiga
     mapa[linha][coluna] = "🟫"
