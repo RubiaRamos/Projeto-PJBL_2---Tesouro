@@ -8,31 +8,44 @@ def mostrar_mapa(mapa):
 
 
 # Função que calcula o movimento do jogador
-def mover(linha, coluna, comando):
+def mover(linha, coluna, comando, passos=1):
 
     # Move para cima
     if comando == "W":
-        return linha - 1, coluna
+        return linha - passos, coluna
 
     # Move para baixo
     elif comando == "S":
-        return linha + 1, coluna
+        return linha + passos, coluna
 
     # Move para esquerda
     elif comando == "A":
-        return linha, coluna - 1
+        return linha, coluna - passos
 
     # Move para direita
     elif comando == "D":
-        return linha, coluna + 1
+        return linha, coluna + passos
 
     return linha, coluna
+
+# funções de validação de movimento
+# verifica se a posição está dentro da matriz
+def dentro_do_mapa(linha, coluna):
+    if linha < 0 or linha > 9:
+        return False
+    if coluna < 0 or coluna > 9:
+        return False
+    return True
+
+# verifica se a posição contém uma parede
+def tem_parede(mapa, linha, coluna):
+    return mapa[linha][coluna] == "🧱"
 
 
 # Mapa do jogo
 mapa_nivel1 = [
     ['🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱'],
-    ['🧱', '🦕', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🌿', '🧱'],
+    ['🧱', '🦕', '🟫', '🟫', '🍎', '🟫', '🟫', '🟫', '🌿', '🧱'],
     ['🧱', '🟫', '☄️', '🌿', '🟫', '🟫', '🟫', '☄️', '🟫', '🧱'],
     ['🧱', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🧱'],
     ['🧱', '🟫', '🟫', '☄️', '🟫', '🌿', '🟫', '🟫', '🟫', '🧱'],
@@ -49,7 +62,7 @@ mapa_nivel2 = [
     ['🧱','🦕','🟫','🟫','☄️','🟫','☄️','🟫','🌿','🧱'],
     ['🧱','☄️','🟫','🟫','🟫','☄️','🟫','☄️','🟫','🧱'],
     ['🧱','🟫','☄️','🟫','☄️','🟫','☄️','🟫','🟫','🧱'],
-    ['🧱','🟫','🟫','🟫','🟫','🌿','🟫','☄️','🟫','🧱'],
+    ['🧱','🟫','🍎','🟫','🟫','🌿','🟫','☄️','🟫','🧱'],
     ['🧱','🟫','☄️','🟫','☄️','🟫','☄️','🟫','☄️','🧱'],
     ['🧱','☄️','🟫','🟫','🟫','☄️','🟫','☄️','🟫','🧱'],
     ['🧱','🟫','☄️','🟫','☄️','🟫','☄️','🟫','🟫','🧱'],
@@ -64,7 +77,7 @@ mapa_nivel3 = [
     ['🧱','☄️','🟫','🟫','🟫','☄️','🟫','🟫','☄️','🧱'],
     ['🧱','🟫','☄️','🟫','☄️','🟫','☄️','🟫','🟫','🧱'],
     ['🧱','🌿','🟫','🟫','🟫','🌿','🟫','☄️','🟫','🧱'],
-    ['🧱','🟫','☄️','☄️','🟫','🟫','🟫','🟫','🟫','🧱'],
+    ['🧱','🟫','☄️','☄️','🟫','🟫','🟫','🟫','🍎','🧱'],
     ['🧱','☄️','🟫','🌿','🟫','☄️','🟫','☄️','🟫','🧱'],
     ['🧱','🟫','☄️','☄️','☄️','🟫','☄️','🟫','🟫','🧱'],
     ['🧱','🟦','🟫','🟫','🟫','🟫','🟫','🟫','🌿','🧱'],
@@ -84,6 +97,9 @@ pontos = 50
 # Quantidade de vidas
 vidas = 3
 
+# Poder especial
+poder_duplo = False
+
 # Controla o nível atual
 nivel = 1
 
@@ -95,6 +111,9 @@ bombas_ativadas = 0
 print("Bem-vindo ao Labirinto do Tesouro!")
 print("Você começa com 50 pontos e 3 vidas.")
 
+# passos
+passos = 1
+
 while True:
 
     # Mostra o mapa
@@ -104,12 +123,17 @@ while True:
     print("Nível:", nivel)
     print("Pontuação:", pontos)
     print("Vidas:", vidas)
+    if poder_duplo:
+        print("Poder especial: Disponível")
+    else:
+        print("Poder especial: Indisponível")
 
     print("\nW = Cima")
     print("S = Baixo")
     print("A = Esquerda")
     print("D = Direita")
     print("Q = Sair")
+    print("P = Poder Especial")
 
     comando = input("\nDigite um comando: ").upper()
 
@@ -130,8 +154,25 @@ while True:
         print("Jogo encerrado!")
         break
 
+    if comando == "P":
+
+        if not poder_duplo:
+            print("Você não possui poder especial!")
+            continue
+
+        direcao = input("Direção (W/A/S/D): ").upper()
+
+        if direcao not in ["W", "A", "S", "D"]:
+            print("Direção inválida!")
+            continue
+
+        print("Movimento duplo ativado!")
+        passos = 2
+        comando = direcao
+        poder_duplo = False
+
     # Verifica comando inválido
-    if comando not in ["W", "A", "S", "D"]:
+    if comando not in ["W", "A", "S", "D", "P"]:
         print("Comando inválido!")
         continue
 
@@ -139,25 +180,31 @@ while True:
     nova_linha, nova_coluna = mover(
         linha_jogador,
         coluna_jogador,
-        comando
+        comando,
+        passos
     )
 
-    # Verifica se saiu dos limites do mapa
-    if (nova_linha < 0 or nova_linha > 9 or
-            nova_coluna < 0 or nova_coluna > 9):
-
+    # validação de limites
+    if not dentro_do_mapa(nova_linha, nova_coluna):
         print("Movimento inválido!")
         pontos -= 5
         movimentos_invalidos += 1
         continue
 
-    # Verifica parede
-    if mapa[nova_linha][nova_coluna] == "🧱":
+    # validação de paredes
+    if tem_parede(mapa, nova_linha, nova_coluna):
         print("Você bateu em uma parede!")
-        print("-5 pontos")
         pontos -= 5
         movimentos_invalidos += 1
         continue
+
+    # Verifica fruta
+    elif mapa[nova_linha][nova_coluna] == "🍎":
+
+        print("🍎 Fruta especial encontrada!")
+        print("Poder de movimento duplo desbloqueado!")
+
+        poder_duplo = True
 
     # Verifica planta
     elif mapa[nova_linha][nova_coluna] == "🌿":
@@ -240,7 +287,7 @@ while True:
           print("=========🏆🏆🏆========")
           print("ESPERAMOS QUE TENHA GOSTADO!!!")
           print("NOME DOS CRIADORES:")
-          print("Maria Clara Cordova, Rúbia Ramos e Vinicius Akio")
+          print("Maria Clara Cordova, Rúbia Ramos e Vinicius Hirai")
           print(f"Sua pontuação foi: {pontos}")
           print(f"Pontuação total {movimentos_validos}")
 
@@ -259,4 +306,8 @@ while True:
 
     # Ganha 1 ponto por andar
     pontos += 1
+
+    # Reseta o poder
+    passos = 1
+
 
