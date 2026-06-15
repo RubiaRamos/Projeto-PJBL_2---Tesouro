@@ -56,6 +56,21 @@ mapa_nivel2 = [
     ['🧱','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟦','🧱'],
     ['🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱']
 ]
+
+# Mapa do nível 3 
+mapa_nivel3 = [
+    ['🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱'],
+    ['🧱','🦕','🟫','☄️','☄️','🟫','☄️','☄️','🟫','🧱'],
+    ['🧱','☄️','🟫','🟫','🟫','☄️','🟫','🟫','☄️','🧱'],
+    ['🧱','🟫','☄️','🟫','☄️','🟫','☄️','🟫','🟫','🧱'],
+    ['🧱','🌿','🟫','🟫','🟫','🌿','🟫','☄️','🟫','🧱'],
+    ['🧱','🟫','☄️','☄️','🟫','🟫','🟫','🟫','🟫','🧱'],
+    ['🧱','☄️','🟫','🌿','🟫','☄️','🟫','☄️','🟫','🧱'],
+    ['🧱','🟫','☄️','☄️','☄️','🟫','☄️','🟫','🟫','🧱'],
+    ['🧱','🟦','🟫','🟫','🟫','🟫','🟫','🟫','🌿','🧱'],
+    ['🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱']
+]
+
 # Posição inicial do jogador
 linha_jogador = 1
 coluna_jogador = 1
@@ -199,8 +214,39 @@ while True:
             print("Boa sorte!")
 
             input("\nPressione ENTER para iniciar o Nível 2...")
+            
+            
 
             continue
+
+        elif nivel == 2:
+          nivel = 3
+          mapa = mapa_nivel3
+
+          linha_jogador = 1
+          coluna_jogador = 1
+
+          print("\n========================")
+          print("   NÍVEL 3 LIBERADO!")
+          print("========================")
+          print("Agora existem muito mais meteoros ☄️")
+          print("Boa sorte!")
+
+          input("\nPressione ENTER para iniciar o Nível 3...")
+
+          continue
+
+        else:
+          print("\n========================")
+          print("PARABENS VOCÊ CONCLUIU OS 3 NIVEIS!!!")
+          print("========================")
+          print("ESPERAMOS QUE TENHA GOSTADO!!!")
+          print("NOME DOS CRIADORES:")
+          print("Maria Clara Cordova, Rúbia Ramos e Vinicius Akio")
+          print(f"Sua pontuação foi: {pontos}")
+          print(f"Pontuação total {movimentos_validos}")
+
+          break
 
     # Atualiza posição do jogador
     mapa[linha_jogador][coluna_jogador] = "🟫"
@@ -214,4 +260,5 @@ while True:
     movimentos_validos += 1
 
     # Ganha 1 ponto por andar
-    pontos += 1d
+    pontos += 1
+
