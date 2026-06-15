@@ -187,6 +187,7 @@ while True:
     # validação de limites
     if not dentro_do_mapa(nova_linha, nova_coluna):
         print("Movimento inválido!")
+        print("-5 pontos")
         pontos -= 5
         movimentos_invalidos += 1
         continue
@@ -194,6 +195,7 @@ while True:
     # validação de paredes
     if tem_parede(mapa, nova_linha, nova_coluna):
         print("Você bateu em uma parede!")
+        print("-5 pontos")
         pontos -= 5
         movimentos_invalidos += 1
         continue
