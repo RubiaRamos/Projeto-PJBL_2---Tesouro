@@ -208,15 +208,13 @@ while True:
             coluna_jogador = 1
 
             print("\n========================")
-            print("   NÍVEL 2 LIBERADO!")
+            print("🎉🎉🎉NÍVEL 2 LIBERADO!🎉🎉🎉")
             print("========================")
             print("Agora existem muito mais meteoros ☄️")
             print("Boa sorte!")
 
             input("\nPressione ENTER para iniciar o Nível 2...")
             
-            
-
             continue
 
         elif nivel == 2:
@@ -227,7 +225,7 @@ while True:
           coluna_jogador = 1
 
           print("\n========================")
-          print("   NÍVEL 3 LIBERADO!")
+          print("🎉🎉🎉NÍVEL 3 LIBERADO!🎉🎉🎉")
           print("========================")
           print("Agora existem muito mais meteoros ☄️")
           print("Boa sorte!")
@@ -237,9 +235,9 @@ while True:
           continue
 
         else:
-          print("\n========================")
+          print("\n========🏆🏆🏆==========")
           print("PARABENS VOCÊ CONCLUIU OS 3 NIVEIS!!!")
-          print("========================")
+          print("=========🏆🏆🏆========")
           print("ESPERAMOS QUE TENHA GOSTADO!!!")
           print("NOME DOS CRIADORES:")
           print("Maria Clara Cordova, Rúbia Ramos e Vinicius Akio")
