@@ -9,7 +9,6 @@ def mostrar_mapa(mapa):
 
 # Função que calcula o movimento do jogador
 def mover(linha, coluna, comando, passos=1):
-
     # Move para cima
     if comando == "W":
         return linha - passos, coluna
@@ -37,10 +36,19 @@ def dentro_do_mapa(linha, coluna):
         return False
     return True
 
+
 # verifica se a posição contém uma parede
 def tem_parede(mapa, linha, coluna):
     return mapa[linha][coluna] == "🧱"
 
+print("\n---------------------Seja bem-vindo ao Salve o Dino-----------------------------\n")
+
+nome_user = input("\nInforme seu nome: ")
+
+print(f"\nBem-vindo(a) {nome_user} esse é o Salve o Dino!")
+print("Você começa com 50 pontos e 3 vidas.\n")
+print(f"Bem-vindo {nome_user} Labirinto do Tesouro!")
+print("Você começa com 50 pontos e 3 vidas.")
 
 # Mapa do jogo
 mapa_nivel1 = [
@@ -58,30 +66,30 @@ mapa_nivel1 = [
 
 # Mapa do nível 2 (Difícil)
 mapa_nivel2 = [
-    ['🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱'],
-    ['🧱','🦕','🟫','🟫','☄️','🟫','☄️','🟫','🌿','🧱'],
-    ['🧱','☄️','🟫','🟫','🟫','☄️','🟫','☄️','🟫','🧱'],
-    ['🧱','🟫','☄️','🟫','☄️','🟫','☄️','🟫','🟫','🧱'],
-    ['🧱','🟫','🍎','🟫','🟫','🌿','🟫','☄️','🟫','🧱'],
-    ['🧱','🟫','☄️','🟫','☄️','🟫','☄️','🟫','☄️','🧱'],
-    ['🧱','☄️','🟫','🟫','🟫','☄️','🟫','☄️','🟫','🧱'],
-    ['🧱','🟫','☄️','🟫','☄️','🟫','☄️','🟫','🟫','🧱'],
-    ['🧱','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟦','🧱'],
-    ['🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱']
+    ['🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱'],
+    ['🧱', '🦕', '🟫', '🟫', '☄️', '🟫', '☄️', '🟫', '🌿', '🧱'],
+    ['🧱', '☄️', '🟫', '🟫', '🟫', '☄️', '🟫', '☄️', '🟫', '🧱'],
+    ['🧱', '🟫', '☄️', '🟫', '☄️', '🟫', '☄️', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '🍎', '🟫', '🟫', '🌿', '🟫', '☄️', '🟫', '🧱'],
+    ['🧱', '🟫', '☄️', '🟫', '☄️', '🟫', '☄️', '🟫', '☄️', '🧱'],
+    ['🧱', '☄️', '🟫', '🟫', '🟫', '☄️', '🟫', '☄️', '🟫', '🧱'],
+    ['🧱', '🟫', '☄️', '🟫', '☄️', '🟫', '☄️', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟦', '🧱'],
+    ['🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱']
 ]
 
-# Mapa do nível 3 
+# Mapa do nível 3
 mapa_nivel3 = [
-    ['🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱'],
-    ['🧱','🦕','🟫','☄️','☄️','🟫','☄️','☄️','🟫','🧱'],
-    ['🧱','☄️','🟫','🟫','🟫','☄️','🟫','🟫','☄️','🧱'],
-    ['🧱','🟫','☄️','🟫','☄️','🟫','☄️','🟫','🟫','🧱'],
-    ['🧱','🌿','🟫','🟫','🟫','🌿','🟫','☄️','🟫','🧱'],
-    ['🧱','🟫','☄️','☄️','🟫','🟫','🟫','🟫','🍎','🧱'],
-    ['🧱','☄️','🟫','🌿','🟫','☄️','🟫','☄️','🟫','🧱'],
-    ['🧱','🟫','☄️','☄️','☄️','🟫','☄️','🟫','🟫','🧱'],
-    ['🧱','🟦','🟫','🟫','🟫','🟫','🟫','🟫','🌿','🧱'],
-    ['🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱','🧱']
+    ['🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱'],
+    ['🧱', '🦕', '🟫', '☄️', '☄️', '🟫', '☄️', '☄️', '🟫', '🧱'],
+    ['🧱', '☄️', '🟫', '🟫', '🟫', '☄️', '🟫', '🟫', '☄️', '🧱'],
+    ['🧱', '🟫', '☄️', '🟫', '☄️', '🟫', '☄️', '🟫', '🟫', '🧱'],
+    ['🧱', '🌿', '🟫', '🟫', '🟫', '🌿', '🟫', '☄️', '🟫', '🧱'],
+    ['🧱', '🟫', '☄️', '☄️', '🟫', '🟫', '🟫', '🟫', '🍎', '🧱'],
+    ['🧱', '☄️', '🟫', '🌿', '🟫', '☄️', '🟫', '☄️', '🟫', '🧱'],
+    ['🧱', '🟫', '☄️', '☄️', '☄️', '🟫', '☄️', '🟫', '🟫', '🧱'],
+    ['🧱', '🟦', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🌿', '🧱'],
+    ['🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱']
 ]
 
 # Posição inicial do jogador
@@ -107,9 +115,6 @@ nivel = 1
 movimentos_validos = 0
 movimentos_invalidos = 0
 bombas_ativadas = 0
-
-print("Bem-vindo ao Labirinto do Tesouro!")
-print("Você começa com 50 pontos e 3 vidas.")
 
 # passos
 passos = 1
@@ -192,8 +197,8 @@ while True:
         movimentos_invalidos += 1
         continue
 
-    # validação de paredes
-    if tem_parede(mapa, nova_linha, nova_coluna):
+    # Verifica parede
+    if mapa[nova_linha][nova_coluna] == "🧱":
         print("Você bateu em uma parede!")
         print("-5 pontos")
         pontos -= 5
@@ -225,9 +230,31 @@ while True:
         vidas -= 1
         bombas_ativadas += 1
 
-        if vidas == 0:
-            print("\nGAME OVER!")
-            break
+        # Game Over pergunta
+        if vidas <= 0:
+            print("💀 GAME OVER! Suas vidas acabaram.")
+            opcao = input("Deseja reiniciar o jogo? (S/N): ").upper()
+
+            if opcao == "S":
+
+                mapa = mapa_nivel1
+                linha_jogador = 1
+                coluna_jogador = 1
+
+                pontos = 50
+                vidas = 3
+                nivel = 1
+
+                movimentos_validos = 0
+                movimentos_invalidos = 0
+                bombas_ativadas = 0
+
+                print("\nReiniciando o jogo do Nível 1...\n")
+                continue
+
+            else:
+                print("Obrigado por jogar!")
+                break
 
         mapa[linha_jogador][coluna_jogador] = "🟫"
 
@@ -246,7 +273,7 @@ while True:
         pontos += 100
 
         if nivel == 1:
-            print("\n🏆🏆🏆 PARABÉNS! 🏆🏆🏆")
+            print(f"\n🏆🏆🏆 PARABÉNS {nome_user}! 🏆🏆🏆")
             print("Você concluiu o NÍVEL 1!")
             print("+100 pontos")
 
@@ -263,37 +290,39 @@ while True:
             print("Boa sorte!")
 
             input("\nPressione ENTER para iniciar o Nível 2...")
-            
+
             continue
 
         elif nivel == 2:
-          nivel = 3
-          mapa = mapa_nivel3
+            nivel = 3
+            mapa = mapa_nivel3
 
-          linha_jogador = 1
-          coluna_jogador = 1
+            linha_jogador = 1
+            coluna_jogador = 1
 
-          print("\n========================")
-          print("🎉🎉🎉NÍVEL 3 LIBERADO!🎉🎉🎉")
-          print("========================")
-          print("Agora existem muito mais meteoros ☄️")
-          print("Boa sorte!")
+            print("\n========================")
+            print("🎉🎉🎉NÍVEL 3 LIBERADO!🎉🎉🎉")
+            print("========================")
+            print("Agora existem muito mais meteoros ☄️")
+            print("Boa sorte!")
 
-          input("\nPressione ENTER para iniciar o Nível 3...")
+            input("\nPressione ENTER para iniciar o Nível 3...")
 
-          continue
+            continue
+
 
         else:
-          print("\n========🏆🏆🏆==========")
-          print("PARABENS VOCÊ CONCLUIU OS 3 NIVEIS!!!")
-          print("=========🏆🏆🏆========")
-          print("ESPERAMOS QUE TENHA GOSTADO!!!")
-          print("NOME DOS CRIADORES:")
-          print("Maria Clara Cordova, Rúbia Ramos e Vinicius Hirai")
-          print(f"Sua pontuação foi: {pontos}")
-          print(f"Pontuação total {movimentos_validos}")
 
-          break
+            print("\n========================")
+            print(f"PARABENS {nome_user} CONCLUIU OS 3 NIVEIS!!!")
+            print("========================")
+            print("ESPERAMOS QUE TENHA GOSTADO!!!")
+            print("NOME DOS CRIADORES:")
+            print("Maria Clara Cordova, Rúbia Ramos e Vinicius Akio")
+            print(f"Sua pontuação foi: {pontos}")
+            print(f"Pontuação total {movimentos_validos}")
+
+            break
 
     # Atualiza posição do jogador
     mapa[linha_jogador][coluna_jogador] = "🟫"
@@ -311,5 +340,4 @@ while True:
 
     # Reseta o poder
     passos = 1
-
 
