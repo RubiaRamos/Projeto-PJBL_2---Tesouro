@@ -1,0 +1,102 @@
+# LABIRINTO DO TESOURO
+
+def mostrar_mapa(mapa):
+    for linha in mapa:
+        print(" ".join(linha))
+    print()
+
+## Mover dino
+def mover(linha, coluna, jogador):
+    if jogador == "W":
+        return linha - 1, coluna
+    elif jogador == "S":
+        return linha + 1, coluna
+    elif jogador == "A":
+        return linha, coluna - 1
+    elif jogador == "D":
+        return linha, coluna + 1
+
+    return linha, coluna
+
+# funções de validação de movimento (VINICIUS)
+# verifica se a posição está dentro da matriz
+def dentro_do_mapa(linha, coluna):
+    if linha < 0 or linha > 9:
+        return False
+    if coluna < 0 or coluna > 9:
+        return False
+    return True
+
+# verifica se a posição contém uma parede
+def tem_parede(mapa, linha, coluna):
+    return mapa[linha][coluna] == "🧱"
+
+
+mapa = [
+    ['🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱'],
+    ['🧱', '🦕', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🌿', '🧱'],
+    ['🧱', '🟫', '☄️', '🌿', '🟫', '🟫', '🟫', '☄️', '🟫', '🧱'],
+    ['🧱', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '🟫', '☄️', '🟫', '🌿', '🟫', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '☄️', '🟫', '🧱'],
+    ['🧱', '🌿', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '☄️', '🟫', '🟫', '🟫', '🌿', '🟫', '🟫', '🧱'],
+    ['🧱', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟫', '🟦', '🧱'],
+    ['🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱', '🧱']
+]
+## Dino andar
+linha = 1
+coluna = 1
+## Dino andar
+pontos = 0
+movimentos_validos = 0
+movimentos_invalidos = 0
+bombas_ativadas = 0
+
+while True:
+
+    mostrar_mapa(mapa)
+
+    print("Pontuação:", pontos)
+    print("W = Cima")
+    print("S = Baixo")
+    print("A = Esquerda")
+    print("D = Direita")
+    print("Q = Sair")
+
+    comando = input("Digite um comando: ").upper()
+
+    if comando == "Q":
+        print("Jogo encerrado!")
+        break
+
+    if comando not in ["W", "A", "S", "D"]:
+        print("Comando inválido!")
+        continue
+
+    nova_linha, nova_coluna = mover(linha, coluna, comando)
+
+    # validação de limites
+    if not dentro_do_mapa(nova_linha, nova_coluna):
+        print("Movimento inválido! Você tentou sair do mapa.")
+        pontos -= 5
+        movimentos_invalidos += 1
+        continue
+
+    # validação de paredes
+    if tem_parede(mapa, nova_linha, nova_coluna):
+        print("Você bateu em uma parede!")
+        pontos -= 5
+        movimentos_invalidos += 1
+        continue
+
+    # Limpa posição antiga
+    mapa[linha][coluna] = "🟫"
+
+    # Atualiza posição
+    linha = nova_linha
+    coluna = nova_coluna
+
+    # Coloca o dinossauro na nova posição
+    mapa[linha][coluna] = "🦕"
+
